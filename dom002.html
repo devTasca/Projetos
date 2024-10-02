@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos e Funções</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgb(234, 255, 131);
+            overflow: auto;
+            
+            
+        }
+
+        h1{
+            border: 5px solid red;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+            font-size: 1.5em; /*edit*/
+        }
+
+        p{
+            border: 3px solid red;
+            border-radius: 5px;
+            padding: 10px;
+            padding-inline: 100px;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        hr {
+            width: 100%; /* Faz o hr ocupar toda a largura */
+            border: none; /* Remove a borda padrão */
+            height: 2px; /* Define a altura da linha */
+            background-color: red; /* Define a cor da linha */
+            margin: 20px 0; /* Adiciona espaçamento acima e abaixo */
+        }
+
+        button{
+            padding: 10px;
+            padding-inline: 50px;
+            margin: 5px;
+            font-weight: bold;
+            border-color: red;
+            
+        }
+
+        button#defaultColor{
+            padding: 5px;
+            padding-inline: 25px;
+            font-weight: lighter;
+        }button:hover{
+            transform: scale(1.1);
+        }
+
+        #square{
+            background-color: green;
+            font: normal 20pt arial;
+            color: white;
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            margin-top: 15px;
+            border: 5px solid red;
+            margin-bottom: 100px;
+            transition: all 0.2s;
+        }
+
+        input#userName{
+            width: 200px;
+            padding: 10px;
+        }
+
+        #welcomeUser{
+           display: none;
+        }
+
+        @media (max-width: 600px){
+            h1{
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+     <h1>Trabalhando com Eventos e funções</h1><hr>
+   <section>
+    <form onsubmit="return false">
+        <input id="userName" type="text" placeholder="Qual o seu nome?">
+        <button class="submitName" id="submitButton">Enviar</button>
+    </form>
+    <p id="welcomeUser"></p>
+    <p id="p01">1 - Passe o mouse nos botões</p>
+    <p id="p01">2 -Use os botões abaixo para mudar a cor da página</p>
+    <p id="p02">3 -Passe o mouse pelo quadrado para mudar sua cor</p>
+    <p id="p03">4 -Clique no quadrado para alterar seu tamanho</p>
+   </section>
+   <div class="bts">
+    <button id="color01">Cor 1</button>
+    <button id="color02">Cor 2</button>
+    <button id="color03">Cor 3</button>
+    <button id="defaultColor">Cor original</button>
+   </div>
+   <div id="square">CLIQUE</div>
+
+   <script>
+    let a = document.getElementById('square')
+    a.addEventListener('click', clicar)
+    a.addEventListener('mouseover', entrar)
+    a.addEventListener('mouseout', sair)
+
+    function clicar(){
+        if (a.style.width !== '250px' && a.style.height !== '250px'){
+            a.style.width = '250px';
+            a.style.height = '250px';
+            a.style.lineHeight = '250px';
+            a.innerHTML = 'DIMINUIR';
+        } else{
+            a.style.width = '200px';
+            a.style.height = '200px';
+            a.style.lineHeight = '200px';
+            a.innerHTML = 'AUMENTAR';
+        }
+    }
+    function entrar(){
+        a.style.backgroundColor = 'blue';
+    }
+    function sair(){
+        a.style.backgroundColor = 'green';
+    }
+
+    const c1 = document.getElementById('color01')
+    c1.addEventListener('click', toColor1)
+
+    function toColor1(){
+        document.body.style.backgroundColor = '#E6E6FA'
+    }
+    
+    const c2 = document.getElementById('color02')
+    c2.addEventListener('click', toColor2)
+
+    function toColor2(){
+        document.body.style.backgroundColor = '#F0F0F0'
+    }
+
+    const c3 = document.getElementById('color03')
+    c3.addEventListener('click', toColor3)
+
+    function toColor3(){
+        document.body.style.backgroundColor = '#FFDAB9'
+    }
+
+    const cO = document.getElementById('defaultColor')
+    cO.addEventListener('click', toOriginalColor)
+
+    function toOriginalColor(){
+        document.body.style.backgroundColor = 'rgb(234, 255, 131)';
+    }
+
+    document.getElementById('submitButton').addEventListener('click', function(){
+        document.getElementById('welcomeUser').style.display='block'
+        let userNameValue = document.getElementById('userName').value;
+        document.getElementById('welcomeUser').innerHTML = `Olá ${userNameValue}, seja muito bem vindo(a)`
+        
+    })
+
+    </script>
+</body>
+</html>
